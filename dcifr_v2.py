@@ -50,6 +50,15 @@ class QComboBox(QtWidgets.QComboBox):
     def __init__(self, parent=None):
         super(QIComboBox, self).__init__(parent)
         
+class MyProxyStyle(QProxyStyle): # adding design theme
+    pass
+    def pixelMetric(self, QStyle_PixelMetric, option=None, widget=None):
+
+        if QStyle_PixelMetric == QStyle.PM_SmallIconSize:
+            return 40
+        else:
+            return QProxyStyle.pixelMetric(self, QStyle_PixelMetric, option, widget)
+        
 class Wizard(QtWidgets.QWizard):
     
     #redefining nextId for page flow
@@ -90,8 +99,14 @@ class Wizard(QtWidgets.QWizard):
         self.page3 = self.setPage(4, self.page3)
         
         self.setWindowTitle("DCiFR")
+        self.setWindowIcon(QtGui.QIcon('logo.png')) # change size?
         self.setGeometry(0, 0, 800, 600)
-    
+        
+        self.setStyleSheet("background-color:#F2F2F2") #background - light grey
+        self.button(QWizard.CancelButton).setStyleSheet("background-color:#ADE6CA") # buttons - light green
+        self.button(QWizard.FinishButton).setStyleSheet("background-color:#ADE6CA")
+        self.button(QWizard.NextButton).setStyleSheet("background-color:#ADE6CA")
+        
 # page 1 - select desired attributes for analyzing
 class Page1(QtWidgets.QWizardPage):
 
@@ -99,26 +114,26 @@ class Page1(QtWidgets.QWizardPage):
         super(Page1, self).__init__(parent)
         
         self.title_label = QLabel('Welcome to DCiFR!', self)
-        self.title_label.move(50, 30)
-        self.title_label.setFont(QFont('Arial', 20))
+        self.title_label.move(200, 30)
+        self.title_label.setFont(QFont('Helvetica', 20))
         self.title_label.adjustSize()
 
         self.subtitle_label = QLabel('Attribute Analysis Models', self)
-        self.subtitle_label.move(100, 75)
-        self.subtitle_label.setFont(QFont('Arial', 15))
+        self.subtitle_label.move(200, 75)
+        self.subtitle_label.setFont(QFont('Helvetica', 15))
         self.subtitle_label.adjustSize()
+        
+        title = QLabel('Please select which facial analysis model you would like to use.', self)
+        title.move(120, 125)
+        title.setFont(QFont('Helvetica', 10))
 
         #hover info 
         info = QLabel('Check the boxes that apply. Hover for more info!', self)
-        info.move(50, 125)
-        info.setFont(QFont('Arial', 10))
+        info.move(50, 175)
+        info.setFont(QFont('Helvetica', 8))
         myFont=QtGui.QFont()
         myFont.setItalic(True)
         info.setFont(myFont)
-        
-        title = QLabel('Please select which facial analysis model you would like to use.', self)
-        title.move(50, 160)
-        title.setFont(QFont('Arial', 10))
         
         info.adjustSize()
         title.adjustSize()
@@ -129,12 +144,15 @@ class Page1(QtWidgets.QWizardPage):
         hbox = QHBoxLayout()
         
         self.deepface_cb = QCheckBox('DeepFace', self)
-        self.deepface_cb.move(50, 200)
+        self.deepface_cb.move(50, 225)
         self.fairface_cb = QCheckBox('FairFace', self)
-        self.fairface_cb.move(50, 250)
+        self.fairface_cb.move(50, 275)
         
         self.deepface_cb.adjustSize()
         self.fairface_cb.adjustSize()
+        
+        self.deepface_cb.setStyleSheet("background-color:#CAE6F2")
+        self.fairface_cb.setStyleSheet("background-color:#CAE6F2")
         
         group = QButtonGroup(self)
         group.addButton(self.deepface_cb)
@@ -159,8 +177,8 @@ class Page2Deep(QtWidgets.QWizardPage):
         
         # not sure how to create DCiFR folder to save to 
         
-        downloads_path = str(Path.home() / "Downloads") # getting users downloads path
-        filename = downloads_path + filename
+        docs_path = str(Path.home() / "Documents") # getting users documents path
+        filename = docs_path + filename
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         
         with open(filename, 'w', newline='') as file:
@@ -220,16 +238,16 @@ class Page2Deep(QtWidgets.QWizardPage):
     def __init__(self, parent=None):
         super(Page2Deep, self).__init__(parent)
         self.title_label = QLabel('DCiFR', self)
-        self.title_label.move(50, 30)
-        self.title_label.setFont(QFont('Arial', 20))
+        self.title_label.move(300, 30)
+        self.title_label.setFont(QFont('Helvetica', 20))
         self.title_label.adjustSize()
         self.title_label = QLabel('Upload Your Images Below', self)
-        self.title_label.move(100, 75)
-        self.title_label.setFont(QFont('Arial', 10))
+        self.title_label.move(250, 75)
+        self.title_label.setFont(QFont('Helvetica', 10))
         self.title_label.adjustSize()
         self.info = QLabel('Wait for the progress bar to fill before moving to the next page!', self)
-        self.info.move(100, 250)
-        self.info.setFont(QFont('Arial', 7))
+        self.info.move(50, 250)
+        self.info.setFont(QFont('Helvetica', 5))
         myFont=QtGui.QFont()
         myFont.setItalic(True)
         self.info.setFont(myFont)
@@ -237,10 +255,13 @@ class Page2Deep(QtWidgets.QWizardPage):
         
         self.button1 = QPushButton("Select Your Folder of Images to Upload Here", self)   
         self.button1.clicked.connect(self.get_image_files)
-        self.button1.move(50, 150)
+        self.button1.setStyleSheet("background-color:#ADE6CA")
+        self.button1.move(150, 150)
         
         self.progress = QProgressBar(self)
-        self.progress.setGeometry(100, 200, 300, 20)
+        self.progress.setGeometry(150, 200, 250, 20)
+        self.progress.setStyleSheet("background-color:#CAE6F2")
+        self.progress.setMaximum(100)
         
 # fairface - folder upload
 class Page2Fair(QtWidgets.QWizardPage):
@@ -423,8 +444,8 @@ class Page2Fair(QtWidgets.QWizardPage):
 
         name = '/DCIFR/dcifr_Fairface_results_' + datetime.now().strftime("%Y-%m-%d-%H_%M.csv")
         
-        downloads_path = str(Path.home() / "Downloads")
-        filename = downloads_path + name
+        docs_path = str(Path.home() / "Documents")
+        filename = docs_path + name
         os.makedirs(os.path.dirname(filename), exist_ok=True)
             
         result[['face_name_align',
@@ -446,16 +467,16 @@ class Page2Fair(QtWidgets.QWizardPage):
     def __init__(self, parent=None):
         super(Page2Fair, self).__init__(parent)
         self.title_label = QLabel('DCiFR', self)
-        self.title_label.move(50, 30)
-        self.title_label.setFont(QFont('Arial', 20))
+        self.title_label.move(200, 30)
+        self.title_label.setFont(QFont('Helvetica', 20))
         self.title_label.adjustSize()
         self.title_label = QLabel('Upload Your Images Below', self)
-        self.title_label.move(100, 75)
-        self.title_label.setFont(QFont('Arial', 10))
+        self.title_label.move(200, 75)
+        self.title_label.setFont(QFont('Helvetica', 10))
         self.title_label.adjustSize()
         self.info = QLabel('Wait for the progress bar to fill before moving to the next page!', self)
-        self.info.move(100, 250)
-        self.info.setFont(QFont('Arial', 7))
+        self.info.move(150, 250)
+        self.info.setFont(QFont('Helvetica', 7))
         myFont=QtGui.QFont()
         myFont.setItalic(True)
         self.info.setFont(myFont)
@@ -463,10 +484,12 @@ class Page2Fair(QtWidgets.QWizardPage):
         
         self.button1 = QPushButton("Select Your Folder of Images to Upload Here", self)   
         self.button1.clicked.connect(self.get_image_files)
-        self.button1.move(50, 150)
+        self.button1.setStyleSheet("background-color:#ADE6CA")
+        self.button1.move(150, 150)
         
         self.progress = QProgressBar(self)
-        self.progress.setGeometry(100, 200, 250, 20)
+        self.progress.setGeometry(150, 200, 250, 20)
+        self.progress.setStyleSheet("background-color:#CAE6F2")
         self.progress.setMaximum(100)
         
 # results page
@@ -474,27 +497,27 @@ class Page3(QtWidgets.QWizardPage):
     def __init__(self, parent=None):
         super(Page3, self).__init__(parent)
         
-        self.title_label = QLabel('DCiFR', self)
-        self.title_label.move(50, 30)
-        self.title_label.setFont(QFont('Arial', 20))
+        self.title_label = QLabel('DCiFR - Results', self)
+        self.title_label.move(250, 30)
+        self.title_label.setFont(QFont('Helvetica', 20))
         self.title_label.adjustSize()
 
-        self.title_label = QLabel('Results', self)
-        self.title_label.move(100, 75)
-        self.title_label.setFont(QFont('Arial', 15))
-        self.title_label.adjustSize()
         self.title_label = QLabel('Here are the results for the image(s) you uploaded:', self)
-        self.title_label.move(100, 125)
-        self.title_label.setFont(QFont('Arial', 10))
+        self.title_label.move(150, 125)
+        self.title_label.setFont(QFont('Helvetica', 10))
         self.title_label.adjustSize()
         
-        results_label = QLabel("Please check your DCIFR folder in your Downloads \nfor a CSV results file", self)
-        results_label.move(100, 200)
-        results_label.setFont(QFont('Arial', 15))
+        results_label = QLabel("Please check your DCIFR folder in your Documents \nfor a CSV results file", self)
+        results_label.move(75, 200)
+        myFont=QtGui.QFont('Helvetica', 14)
+        myFont.setItalic(True)
+        results_label.setFont(myFont)
         results_label.adjustSize()
         
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
+    myStyle = MyProxyStyle('Fusion')
+    app.setStyle(myStyle)
     wizard = Wizard()
     wizard.show()
     app.exec_() 
