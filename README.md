@@ -2,7 +2,7 @@
 
 ![](https://github.com/peter1125/DCiFR/blob/main/logo.png)
 
-DCiFR (Demographic Characteristics in Facial Recognition) is a wrapper software allows you to run deep learning models to parse demographic characteristics from an image. This open-source wrapper software written in Python has a GUI that will allow you to run complex models without any knowledge of coding. This includes functions from [deepface](https://github.com/serengil/deepface) and is built with [PyQT5](https://pypi.org/project/PyQt5/) to provide the GUI.
+DCiFR (Demographic Characteristics in Facial Recognition) is a wrapper software that allows you to run deep learning models to parse demographic characteristics from an image. This open-source wrapper software written in Python has a GUI that will allow you to run complex models without any knowledge of coding. This includes functions from [deepface](https://github.com/serengil/deepface) and is built with [PyQT5](https://pypi.org/project/PyQt5/) to provide the GUI.
 
 ## Getting Started
 
