@@ -57,7 +57,7 @@ More information on the attributes and how they are modeled can be found [here](
 
 
 ## Output
-The results will be saved in a DCIFR folder within the user's Documents as *dcifr_(Deepface/Fairface)_results_(date/time).csv*
+The results will be saved in a DCIFR folder within the user's Documents as *dcifr_Deepface_results* or *dcifr_Fairface_results* with the date and time of creation attached to the end of the file name.
 
 ## Reference
 
