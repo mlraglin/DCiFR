@@ -10,11 +10,7 @@ Dependencies for running DCiFR include deepface, and PyQT5.
 
 Run
 ```
-pip install deepface
-```
-and 
-```
-pip install PyQt5
+pip install deepface & pyqt5
 ```
 to get started. 
 
