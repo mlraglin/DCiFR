@@ -40,8 +40,8 @@ More information on the attributes and how they are modeled can be found [here](
 
 Based on faces within images, DCiFR's FairFace pipeline reports results of eight attributes: race, race4, gender, age, race_scores_fair, race_scores_fair_4, gender_scores_fair, and age_scores_fair.
 
-+ Race - The software predicts the probability of falling into one of seven race categories:  White, Black, Latino_Hispanic, East Asian, Southeast Asian, Indian, or Middle Eastern.
-+ Race4 - The software predicts the probability of falling into one of four race categories: White, Black, Asian, or Indian.
++ Race - Predicted probability of falling into one of seven race categories:  White, Black, Latino_Hispanic, East Asian, Southeast Asian, Indian, or Middle Eastern.
++ Race4 - Predicted probability of falling into one of four race categories: White, Black, Asian, or Indian.
 + Gender - Reports either male or female.
 + Age - Predicted age will fall within the following ranges: 0-2, 3-9, 10-19, 20-29, 30-39, 40-49, 50-59, 60-69, or 70+.
 + Race_scores_fair - The model confidence score for predicting race.
