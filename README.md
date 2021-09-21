@@ -6,21 +6,27 @@ DCiFR (Demographic Characteristics in Facial Recognition) is a wrapper software 
 
 ## Getting Started
 
-Dependencies for running DCiFR include deepface, and PyQT5.
+1. If you do not already have Python installed, navigate to [this link](https://docs.anaconda.com/anaconda/install/index.html) to install it.
 
-Run
-```
-pip install deepface & pyqt5
-```
-to get started. 
+2. Download this repository to your local device.
 
+3. In the command line, change your working directory to <*download path*>.
 
-To fire up the GUI, in your terminal type:
+4. For initial run, enter the following in the command line.
++ Windows
 ```
-python3 dcifr_code.py
+dcifr.sh
 ```
 
-Jupyter Notebook version is also available in this repo - *dcifr_code.ipynb*.
++ Mac
+```
+sh dcifr.sh
+```
+
+5. After the initial run, use the following code to run DCiFR.
+```
+python3 dcifr.py
+```
 
 ## DeepFace Attributes
 
