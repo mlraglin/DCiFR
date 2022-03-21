@@ -74,6 +74,23 @@ The results will be saved in a DCIFR folder within the user's Documents as *dcif
 + [fairface](https://github.com/dchen236/FairFace)
 + [PyQT5](https://pypi.org/project/PyQt5/)
 
+
+## Citation
+
+    Raglin, Melina, Eungang Choi, and Erick Axxe. 2022. DCiFR (Demographic Characteristics in Facial Recognition [computer program]. Version 1.0.   https://pypi.org/project/dcifr/.
+
+Here is a bibtex entry:
+
+
+@misc{raglin_dcifr_2022,
+	title = {DCiFR (Demographic Characteristics in Facial Recognition},
+	url = {https://pypi.org/project/dcifr/},
+	author = {Raglin, Melina and Choi, Eungang and Axxe, Erick},
+	year = {2022},
+}
+
+
+
 ## License
 
     DCiFR: Demographic Characteristics in Facial Recognition.
