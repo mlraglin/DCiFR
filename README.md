@@ -8,7 +8,7 @@ DCiFR (Demographic Characteristics in Facial Recognition) is a wrapper software 
 
 If you do not already have Python installed, navigate to [this link](https://docs.anaconda.com/anaconda/install/index.html) to install it.
 
-To downlaod DCiFR from the PyPi library, enter the following in the command line.
+To download DCiFR from the PyPi library, enter the following in the command line.
 ```
 pip install dcifr
 ```
